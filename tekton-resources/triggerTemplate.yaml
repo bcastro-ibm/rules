@@ -18,8 +18,8 @@ spec:
         generateName: build-image-
       spec:
         pipelineRef:
-          name: kogito-cicd-pipeline
+          name: kogito-pipeline
         workspaces:
-          - name: shared-workspace
+          - name: git-source
             persistentVolumeClaim:
               claimName: source-workspace-pvc
