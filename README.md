@@ -241,6 +241,8 @@ In the [`operator`](operator) directory you'll find the custom resources needed 
        ![Installing OpenShift Pipelines](docs/tekton-operator-install.png)
    3. Click **Install**. On the next screen you can use the default values, and click on **Install** again.
 4. While the operator is installing, fork and clone this repo to your local machine. Access the folder directory so we can start deploying the pipeline definitions.
+    $ git clone ""link""
+    $ cd your "folder"
 
 
 ### Creating the Tekton resources into your project namespace
@@ -248,7 +250,7 @@ In the [`operator`](operator) directory you'll find the custom resources needed 
 1. Run the following oc command to create the pipeline resources:
 
 ```
-$ oc create -f ./cicd/tekton-resources/ -n kogito
+$ oc create -f ./tekton-resources/ -n kogito
 
 configmap/custom-maven-settings created
 eventlistener.triggers.tekton.dev/kogito-event-listener created
@@ -289,8 +291,21 @@ The following resources should be created in your namespace:
 You can confirm this by opening the OpenShift Console using the Developer perspective, and accessing Pipelines menu. From the **Project** dropdown list, select `kogito`, then you should see the `kogito-pipeline`:
 ![Pipeline View	](docs/pipelines-view.png)
 
-Click the `kogito-pipeline` to see its details with a graphical representation.
-![Pipeline View](docs/pipeline-details.png)
+Click the `kogito-pipeline` to see its details with a graphical representation. Double check configurations by clicking on actions->edit pipeline
+![Pipeline View](docs/pipeline-edit.png)
+
+Click on `git-clone` bubble and add git-clone as task
+![Git-clone View](docs/git-clone.png)
+ - Make sure Display name, url, and output are set accordingly 
+
+Click on `openshift-client` bubble and add openshift-client as task
+![Openshift-client View](docs/openshift-client.png)
+ - Make sure script is as follow
+    - oc delete kogitobuild.rhpam.kiegroup.org/rules
+    - oc apply -f operator/rules.yaml
+ - Check if version is correctly configured to the version found on your reservation 
+ - Make sure your workspace manifest-dir is selected
+
 
 ### Creating the webhook to trigger pipelines automatically
 
