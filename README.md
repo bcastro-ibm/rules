@@ -241,13 +241,17 @@ In the [`operator`](operator) directory you'll find the custom resources needed 
        ![Installing OpenShift Pipelines](docs/tekton-operator-install.png)
    3. Click **Install**. On the next screen you can use the default values, and click on **Install** again.
 4. While the operator is installing, fork and clone this repo to your local machine. Access the folder directory so we can start deploying the pipeline definitions.
+```
     $ git clone ""link""
     $ cd your "folder"
+```
 
 
 ### Creating the Tekton resources into your project namespace
 
-1. Run the following oc command to create the pipeline resources:
+1. Make sure to go into your tekton-resources folder -> pipeline.yaml file and within spec->params->default replace the url with your corresponding github repo url
+
+2. Run the following oc command to create the pipeline resources:
 
 ```
 $ oc create -f ./tekton-resources/ -n kogito
